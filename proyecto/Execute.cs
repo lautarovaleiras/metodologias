@@ -5,6 +5,8 @@ using System.Text;
 using metodologias.utils;
 using metodologias.Iterator;
 using metodologias.Strategy;
+using metodologias.factory;
+using metodologias.observer;
 namespace metodologias.proyecto
 {
     class Execute
@@ -26,6 +28,14 @@ namespace metodologias.proyecto
             }
         }
 
+        public static void llenar(IColeccionable c, int opcion)
+        {
+            for (int i = 1; i <= 20; i++)
+            {
+                IComparable elemento = FabricaDeComparables.crearAleatorio(opcion);
+                c.agregar(elemento);
+            }
+        }
         public static void cambiarEstrategia(IColeccionable c, IComparadorAlumnoStrategy s)
         {
             IIterador iterador = c.iterador();
@@ -37,37 +47,23 @@ namespace metodologias.proyecto
             }
         }
 
+        public static void dictadoDeClases(Profesor p)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                p.hablarALaClase();
+                p.escribirEnElPizarron();
+            }
+
+        }
+
         public static void informar(IColeccionable c)
         {
             Console.WriteLine(c.cuantos());
             Console.WriteLine(c.maximo());
             Console.WriteLine(c.minimo());
-            //int numeroLeido = int.Parse(Console.ReadLine());
-            //IComparable comp = new Numero(numeroLeido);
-
-            Console.WriteLine("Ingrese nombre, dni, legajo y promedio para ver si está en la colección:");
-
-            string nombre = Console.ReadLine();
-            int dni;
-            while (!int.TryParse(Console.ReadLine(), out dni))
-            {
-                Console.WriteLine("DNI inválido. Ingrese un número válido:");
-            }
-
-            int legajo;
-            while (!int.TryParse(Console.ReadLine(), out legajo))
-            {
-                Console.WriteLine("Legajo inválido. Ingrese un número válido:");
-            }
-
-            double promedio;
-            while (!double.TryParse(Console.ReadLine(), out promedio))
-            {
-                Console.WriteLine("Promedio inválido. Ingrese un número válido:");
-            }
-
-            IComparable elemento = new Alumno(nombre, dni, promedio, legajo);
-
+            LectorDeDatos opcion = new LectorDeDatos();
+            IComparable elemento = FabricaDeComparables.crearPorTeclado(opcion.numeroPorTeclado());
 
             if (c.contiene(elemento))
             {
@@ -94,17 +90,19 @@ namespace metodologias.proyecto
 
         public static void Main(string[] args)
         {
+            IObservado p = new Profesor("Juan", 12345678, 5);
             IColeccionable con = new Conjunto();
-            llenarAlumnos(con);
-            imprimirElementos(con);
-            informar(con);
-            //cambiarEstrategia(con, new DniStrategy());
+            llenar(con, 2);
+            IIterador iterador = con.iterador();
+            while (!iterador.fin())
+            {
+                Console.WriteLine(iterador.actual().ToString());
+                p.agregarObservador((Alumno)iterador.actual());
+                iterador.siguiente();
+            }
+            //imprimirElementos(con);
             //informar(con);
-
-
-            //ColeccionMultiple cm = new ColeccionMultiple(pila, cola);
-
-            //informar(cm);
+            dictadoDeClases((Profesor)p);
             Console.WriteLine("El programa finalizó correctamente.\n");
             Console.ReadKey();
 

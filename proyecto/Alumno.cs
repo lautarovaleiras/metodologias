@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using metodologias.observer;
 using metodologias.Strategy;
 
 namespace metodologias.proyecto
 {
-    public class Alumno : Persona
+    public class Alumno : Persona, IObservador
     {
         double promedio;
         int legajo;
@@ -52,6 +53,29 @@ namespace metodologias.proyecto
         public override string ToString()
         {
             return string.Format("[Persona: Nombre={0}, Dni={1}, Promedio={2}, Legajo={3}]", nombre, dni, promedio, legajo);
+        }
+
+        public void prestarAtencion()
+        {
+            Console.WriteLine("El alumno " + this.nombre + " está prestando atención.");
+        }
+
+        public void distraerse()
+        {
+            Console.WriteLine("El alumno " + this.nombre + " se está distrayendo.");
+        }
+
+        void IObservador.actualizar(IObservado o)
+        {
+            Profesor p = (Profesor)o;
+            if (p.hablando)
+            {
+                this.prestarAtencion();
+            }
+            else
+            {
+                this.distraerse();
+            }
         }
 
     }

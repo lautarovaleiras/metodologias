@@ -42,5 +42,10 @@ namespace metodologias.utils
             else
                 return false;
         }
+
+        public override string ToString()
+        {
+            return string.Format("[Numero: Valor={0}]", this.valor);
+        }
     }
 }
