@@ -51,7 +51,9 @@ namespace metodologias.proyecto
         {
             for (int i = 0; i < 5; i++)
             {
+
                 p.hablarALaClase();
+                
                 p.escribirEnElPizarron();
             }
 
@@ -91,13 +93,19 @@ namespace metodologias.proyecto
         public static void Main(string[] args)
         {
             IObservado p = new Profesor("Juan", 12345678, 5);
-            IColeccionable con = new Conjunto();
-            llenar(con, 2);
-            IIterador iterador = con.iterador();
+            AlumnoFavorito alumnoFav = new AlumnoFavorito("Juan", 12345678, 5, 1500);
+
+            IColeccionable alumnos = new Conjunto();
+            llenar(alumnos, 2);
+            alumnos.agregar(alumnoFav);
+            IIterador iterador = alumnos.iterador();
             while (!iterador.fin())
             {
+                Alumno alumno = (Alumno)iterador.actual();
                 Console.WriteLine(iterador.actual().ToString());
-                p.agregarObservador((Alumno)iterador.actual());
+                p.agregarObservador(alumno);
+                alumno.agregarObservador((AlumnoFavorito)alumnoFav);
+                alumnoFav.agregarObservador((Profesor)p);
                 iterador.siguiente();
             }
             //imprimirElementos(con);

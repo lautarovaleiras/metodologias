@@ -52,6 +52,7 @@
     <Compile Include="observer\IObservado.cs" />
     <Compile Include="observer\IObservador.cs" />
     <Compile Include="proyecto\Alumno.cs" />
+    <Compile Include="proyecto\AlumnoFavorito.cs" />
     <Compile Include="proyecto\Profesor.cs" />
     <Compile Include="Strategy\AntiguedadStrategy.cs" />
     <Compile Include="Strategy\DniStrategy.cs" />

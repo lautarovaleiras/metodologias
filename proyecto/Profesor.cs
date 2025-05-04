@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace metodologias.proyecto
 {
-    public class Profesor : Persona, IObservado
+    public class Profesor : Persona, IObservado, IObservador
     {
         List<IObservador> observadores = new List<IObservador>();
         int antiguedad;
@@ -54,12 +54,29 @@ namespace metodologias.proyecto
 
         }
 
+        public void hacerSilencio()
+        {
+            Console.WriteLine("Silencio, no se distraigan");
+            this.hablando = true;
+            ((IObservado)this).notificar();
+        }
+
         public override string ToString()
         {
             return string.Format("[Persona: Nombre={0}, Dni={1}, antiguedad={2}]", nombre, dni, this.antiguedad);
         }
 
-
-
+        public void actualizar(IObservado o)
+        {
+            AlumnoFavorito af = (AlumnoFavorito)o;
+            if (af.avisarProfesor)
+            {
+                this.hacerSilencio();
+            }
+            else
+            {
+                this.escribirEnElPizarron();
+            }
+        }
     }
 }

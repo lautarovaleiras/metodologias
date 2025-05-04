@@ -7,10 +7,14 @@ using metodologias.Strategy;
 
 namespace metodologias.proyecto
 {
-    public class Alumno : Persona, IObservador
+    public class Alumno : Persona, IObservador, IObservado
     {
         double promedio;
         int legajo;
+
+        List<IObservador> AlumnosFavoritoObservando = new List<IObservador>();
+        public bool distrayendose = true;
+
 
         IComparadorAlumnoStrategy strategy = new LegajoStrategy();
         public Alumno(string n, int d, double p, int l): base(n,d)
@@ -58,11 +62,14 @@ namespace metodologias.proyecto
         public void prestarAtencion()
         {
             Console.WriteLine("El alumno " + this.nombre + " está prestando atención.");
+            this.distrayendose = false;
         }
 
-        public void distraerse()
+        public virtual void distraerse()
         {
             Console.WriteLine("El alumno " + this.nombre + " se está distrayendo.");
+            this.distrayendose = true;
+            ((IObservado)this).notificar();
         }
 
         void IObservador.actualizar(IObservado o)
@@ -78,5 +85,23 @@ namespace metodologias.proyecto
             }
         }
 
+        public void agregarObservador(IObservador o)
+        {
+            AlumnosFavoritoObservando.Add(o);
+
+        }
+
+        public void quitarObservador(IObservador o)
+        {
+            AlumnosFavoritoObservando.Remove(o);
+        }
+
+        public void notificar()
+        {
+            foreach (IObservador o in AlumnosFavoritoObservando)
+            {
+                o.actualizar(this);
+            }
+        }
     }
 }
