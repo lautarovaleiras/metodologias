@@ -1,4 +1,5 @@
-﻿using metodologias.proyecto;
+﻿using metodologias.adapter;
+using metodologias.proyecto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,17 +9,17 @@ namespace metodologias.Strategy
 {
     class DniStrategy : IComparadorAlumnoStrategy
     {
-        public bool sosIgual(Alumno a1, Alumno a2)
+        public bool sosIgual(IAlumno a1, IAlumno a2)
         {
             return a1.getDni() == a2.getDni();
         }
 
-        public bool sosMayor(Alumno a1, Alumno a2)
+        public bool sosMayor(IAlumno a1, IAlumno a2)
         {
             return a1.getDni() > a2.getDni();
         }
 
-        public bool sosMenor(Alumno a1, Alumno a2)
+        public bool sosMenor(IAlumno a1, IAlumno a2)
         {
             return a1.getDni() < a2.getDni();
         }

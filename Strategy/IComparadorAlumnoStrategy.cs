@@ -1,4 +1,5 @@
-﻿using metodologias.proyecto;
+﻿using metodologias.adapter;
+using metodologias.proyecto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,9 @@ namespace metodologias.Strategy
 {
     public interface IComparadorAlumnoStrategy
     {
-        bool sosIgual(Alumno a1, Alumno a2);
-        bool sosMenor(Alumno a1, Alumno a2);
-        bool sosMayor(Alumno a1, Alumno a2);
+        bool sosIgual(IAlumno a1, IAlumno a2);
+        bool sosMenor(IAlumno a1, IAlumno a2);
+        bool sosMayor(IAlumno a1, IAlumno a2);
     }
 }
 

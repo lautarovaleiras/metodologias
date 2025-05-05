@@ -7,6 +7,8 @@ using metodologias.Iterator;
 using metodologias.Strategy;
 using metodologias.factory;
 using metodologias.observer;
+using metodologias.adapter;
+using metodologias.decorator;
 namespace metodologias.proyecto
 {
     class Execute
@@ -91,6 +93,33 @@ namespace metodologias.proyecto
         }
 
         public static void Main(string[] args)
+        {
+            Student student;
+            Teacher teacher = new Teacher();
+            IAlumno alumno;
+            for (int i = 0; i < 10; i++)
+            {
+                alumno = (IAlumno)FabricaDeComparables.crearAleatorio(2);
+                IAlumno alumnoDecoradoLetras = new DecoradorLetras(alumno);
+                IAlumno alumnoDecorado = new DecoradorLegajo(alumnoDecoradoLetras);
+
+                student = new AlumnoAdapter(alumnoDecorado);
+
+                teacher.goToClass(student);
+            }
+
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    IComparable elemento = FabricaDeComparables.crearAleatorio(4);
+            //    AlumnoAdapter alumnoAdapter = new AlumnoAdapter((IAlumno)elemento);
+            //    teacher.goToClass(alumnoAdapter);
+            //}
+
+            teacher.teachingAClass();
+
+
+        }
+        public static void MainViejo()
         {
             IObservado p = new Profesor("Juan", 12345678, 5);
             AlumnoFavorito alumnoFav = new AlumnoFavorito("Juan", 12345678, 5, 1500);
