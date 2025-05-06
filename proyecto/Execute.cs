@@ -9,6 +9,7 @@ using metodologias.factory;
 using metodologias.observer;
 using metodologias.adapter;
 using metodologias.decorator;
+using metodologias.command;
 namespace metodologias.proyecto
 {
     class Execute
@@ -93,6 +94,43 @@ namespace metodologias.proyecto
         }
 
         public static void Main(string[] args)
+        {
+            Cola cola = new Cola();
+            Aula aula = new Aula();
+
+
+            for (int i = 1; i <= 20; i++)
+            {
+                IComparable elemento = FabricaDeComparables.crearAleatorio(2);
+                cola.agregar(elemento);
+                if(i == 1)
+                {
+                    cola.setOrdenInicio(new OrdenInicio(aula));
+
+                }
+                cola.setOrdenLlegaAlumno(new OrdenLlegaAlumno(aula));
+
+            }
+
+            for (int i = 1; i <= 20; i++)
+            {
+                IComparable elemento = FabricaDeComparables.crearAleatorio(4);
+                cola.agregar(elemento);
+                cola.setOrdenLlegaAlumno(new OrdenLlegaAlumno(aula));
+                if (i == 20)
+                {
+                    cola.setOrdenAulaLlena(new OrdenAulaLlena(aula));
+                }
+
+            }
+
+
+            //llenar(cola, 2); // Alumnos
+            //llenar(cola, 4); // AlumnosMuyEstudiosos
+
+
+        }
+        public static void MainDecorator()
         {
             Student student;
             Teacher teacher = new Teacher();

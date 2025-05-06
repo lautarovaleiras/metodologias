@@ -1,4 +1,5 @@
-﻿using metodologias.proyecto;
+﻿using metodologias.proxy;
+using metodologias.proyecto;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace metodologias.factory
 
         public override IComparable crearAleatorio()
         {
-            return new Alumno(generador.stringAleatoreo(4), generador.numeroAleatoreo(100000000), (double)generador.doubleAleatorio(), generador.numeroAleatoreo(99999));
+            return new AlumnoProxy(generador.stringAleatoreo(4), generador.numeroAleatoreo(100000000), (double)generador.doubleAleatorio(), generador.numeroAleatoreo(99999));
         }
 
         public override IComparable crearPorTeclado()

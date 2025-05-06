@@ -3,9 +3,11 @@ using metodologias.proyecto;
 using System.Collections.Generic;
 using System.Linq;
 using metodologias.Iterator;
+using metodologias.command;
+using metodologias.adapter;
 namespace metodologias.utils
 {
-    public class Pila : IColeccionable, IIterable
+    public class Pila : IColeccionable, IIterable, IOrdenable
     {
         private List<IComparable> elementos;
 
@@ -94,6 +96,21 @@ namespace metodologias.utils
         IIterador IIterable.iterador()
         {
             return new IteradorDePila(this);
+        }
+
+        public void setOrdenInicio(IOrdenEnAula1 orden)
+        {
+            orden.ejecutar();
+        }
+
+        public void setOrdenLlegaAlumno(IOrdenEnAula2 orden)
+        {
+            orden.ejecutar(this.Sacar() as IAlumno);
+        }
+
+        public void setOrdenAulaLlena(IOrdenEnAula1 orden)
+        {
+            orden.ejecutar();
         }
     }
 }

@@ -2,10 +2,12 @@
 using System.Linq;
 using metodologias.proyecto;
 using metodologias.Iterator;
+using metodologias.command;
+using metodologias.adapter;
 
 namespace metodologias.utils
 {
-    public class Cola : IColeccionable, IIterable
+    public class Cola : IColeccionable, IIterable, IOrdenable
     {
         private List<IComparable> elementos;
 
@@ -91,6 +93,21 @@ namespace metodologias.utils
         IIterador IIterable.iterador()
         {
             return new IteradorDeCola(this);
+        }
+
+        public void setOrdenInicio(IOrdenEnAula1 orden)
+        {
+            orden.ejecutar();
+        }
+
+        public void setOrdenLlegaAlumno(IOrdenEnAula2 orden)
+        {
+            orden.ejecutar(this.sacar() as IAlumno);
+        }
+
+        public void setOrdenAulaLlena(IOrdenEnAula1 orden)
+        {
+            orden.ejecutar();
         }
     }
 }
