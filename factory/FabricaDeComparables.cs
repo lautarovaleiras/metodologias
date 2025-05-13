@@ -21,6 +21,7 @@ namespace metodologias.factory
                 case 2: fabrica = new FabricaDeAlumnos(); break;
                 case 3: fabrica = new FabricaDeProfesor(); break;
                 case 4: fabrica = new FabricaDeAlumnosMuyEstudiosos(); break;
+                case 5: fabrica = new FabricaAlumnosCompuestos(); break;
             }
 
             return fabrica.crearAleatorio();

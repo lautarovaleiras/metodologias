@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="adapter\AlumnoAdapter.cs" />
+    <Compile Include="adapter\AlumnoCompuestoAdapter.cs" />
     <Compile Include="adapter\IAlumno.cs" />
     <Compile Include="adapter\MDPI.cs" />
     <Compile Include="Class1.cs" />
@@ -46,6 +47,7 @@
     <Compile Include="command\OrdenAulaLlena.cs" />
     <Compile Include="command\OrdenInicio.cs" />
     <Compile Include="command\OrdenLlegaAlumno.cs" />
+    <Compile Include="composite\AlumnoCompuesto.cs" />
     <Compile Include="decorator\CalificacionesDecorator.cs" />
     <Compile Include="decorator\DecoradorBeauty.cs" />
     <Compile Include="decorator\DecoradorLegajo.cs" />
@@ -53,6 +55,7 @@
     <Compile Include="decorator\DecoradorOrden.cs" />
     <Compile Include="decorator\DecoradorPromocion.cs" />
     <Compile Include="EjemploDeUsoDeRandom.cs" />
+    <Compile Include="factory\FabricaAlumnosCompuestos.cs" />
     <Compile Include="factory\FabricaDeAlumnos.cs" />
     <Compile Include="factory\FabricaDeAlumnosMuyEstudiosos.cs" />
     <Compile Include="factory\FabricaDeComparables.cs" />

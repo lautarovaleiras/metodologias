@@ -10,6 +10,7 @@ using metodologias.observer;
 using metodologias.adapter;
 using metodologias.decorator;
 using metodologias.command;
+using metodologias.composite;
 namespace metodologias.proyecto
 {
     class Execute
@@ -99,10 +100,10 @@ namespace metodologias.proyecto
             Aula aula = new Aula();
 
 
-            for (int i = 1; i <= 20; i++)
+            for (int i = 1; i <= 1; i++)
             {
-                IComparable elemento = FabricaDeComparables.crearAleatorio(2);
-                cola.agregar(elemento);
+                IComparable alumno = FabricaDeComparables.crearAleatorio(2);
+                cola.agregar(alumno);
                 if(i == 1)
                 {
                     cola.setOrdenInicio(new OrdenInicio(aula));
@@ -112,19 +113,19 @@ namespace metodologias.proyecto
 
             }
 
-            for (int i = 1; i <= 20; i++)
+            for (int i = 1; i <= 1; i++)
             {
-                IComparable elemento = FabricaDeComparables.crearAleatorio(4);
-                cola.agregar(elemento);
+                IComparable alumno = FabricaDeComparables.crearAleatorio(4);
+                cola.agregar(alumno);
                 cola.setOrdenLlegaAlumno(new OrdenLlegaAlumno(aula));
-                if (i == 20)
-                {
-                    cola.setOrdenAulaLlena(new OrdenAulaLlena(aula));
-                }
 
             }
+            // composite
+            IComparable alumnoCompuesto = FabricaDeComparables.crearAleatorio(5);
+            cola.agregar(alumnoCompuesto);
+            cola.setOrdenLlegaAlumno(new OrdenLlegaAlumno(aula));
 
-
+            cola.setOrdenAulaLlena(new OrdenAulaLlena(aula));
             //llenar(cola, 2); // Alumnos
             //llenar(cola, 4); // AlumnosMuyEstudiosos
 
