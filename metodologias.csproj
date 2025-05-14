@@ -83,6 +83,8 @@
     <Compile Include="Strategy\LegajoStrategy.cs" />
     <Compile Include="Strategy\NombreStrategy.cs" />
     <Compile Include="Strategy\PromedioStrategy.cs" />
+    <Compile Include="template\JuegoDeCartas.cs" />
+    <Compile Include="template\Truco.cs" />
     <Compile Include="utils\ColeccionMultiple.cs" />
     <Compile Include="utils\IColeccionable.cs" />
     <Compile Include="proyecto\Execute.cs" />

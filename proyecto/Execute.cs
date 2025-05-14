@@ -11,6 +11,7 @@ using metodologias.adapter;
 using metodologias.decorator;
 using metodologias.command;
 using metodologias.composite;
+using metodologias.template;
 namespace metodologias.proyecto
 {
     class Execute
@@ -95,6 +96,21 @@ namespace metodologias.proyecto
         }
 
         public static void Main(string[] args)
+        {
+            Alumno jugador1 = new Alumno("Juan", 12345678, 5, 1500);
+            Alumno jugador2 = new Alumno("Pedro", 87654321, 7, 2000);
+
+            Truco truco = new Truco(jugador1, jugador2);
+
+           truco.mezclarMazo();
+           truco.repartirCartas();
+            while(truco.checkGanador() == false)
+            {
+                truco.jugarMano();
+            }
+           truco.mostrarGanador();
+        }
+        public static void MainComposite()
         {
             Cola cola = new Cola();
             Aula aula = new Aula();
